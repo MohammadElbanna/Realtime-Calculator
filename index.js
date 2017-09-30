@@ -1,6 +1,9 @@
-var app = require("express")();
+var express = require("express");
+var app = express();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
+
+app.use(express.static("client/build"));
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/client/build/index.html");
@@ -14,6 +17,6 @@ io.on("connection", function(socket) {
   });
 });
 
-http.listen(3000, function() {
+http.listen(4000, function() {
   console.log("listening on *:3000");
 });
