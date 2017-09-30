@@ -1,28 +1,64 @@
-.App {
+.gridContainer {
+  display: grid;
+  grid-template-rows: repeat(9, calc(100vh / 9));
+  grid-template-columns: repeat(4, 1fr);
+  background: #000;
+  grid-gap: 1px 1px;
+}
+
+.calcButton {
+  font-size: 5vh;
   text-align: center;
+  background: linear-gradient(180deg, #cacbcc 0, #c8cacb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.calcButton:active {
+  opacity: 0.9;
+  transition: opacity 0.2s;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.operationButton {
+  color: #fff;
+  background: linear-gradient(180deg, #f89312 0, #f89212);
 }
 
-.App-title {
-  font-size: 1.5em;
+.acButton {
+  grid-column: 1 / span 3;
 }
 
-.App-intro {
-  font-size: large;
+.resultDisplay {
+  grid-row: 1 / span 2;
+  grid-column: 1 / span 4;
+  background: #202020;
+  color: #fff;
+  font-size: 15vh;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.resultDisplay span {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+}
+
+.zeroButton {
+  grid-column: 1 / span 2;
+}
+
+button {
+}
+
+.logPanel {
+  grid-row: span 2;
+  grid-column: span 4;
+  background: #fff;
+}
+
+.logPanel h3 {
+  padding-left: 10px;
+  font-style: italic;
 }
