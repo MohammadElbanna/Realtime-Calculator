@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import CalculatorButton from "./CalculatorButton.js";
+import ResultDisplay from "./ResultDisplay.js";
+import LogPanel from "./LogPanel.js";
 import styles from "./App.css";
 import utils from "./service.js";
 import io from "socket.io-client";
@@ -120,60 +123,37 @@ class App extends Component {
   };
 
   render() {
+    const resultDisplayNumber =
+      this.state.secondOperand !== undefined
+        ? this.state.secondOperand
+        : this.state.firstOperand;
+
     return (
       <div className={styles.gridContainer} onClick={this.handleButtonClick}>
-        <div className={styles.resultDisplay}>
-          <span>
-            {this.state.secondOperand !== undefined ? (
-              this.state.secondOperand
-            ) : (
-              this.state.firstOperand
-            )}
-          </span>
-        </div>
+        <ResultDisplay resultDisplayNumber={resultDisplayNumber} />
 
-        <button className={`${styles.acButton} ${styles.calcButton}`}>
-          AC
-        </button>
-        <button className={`${styles.calcButton} ${styles.operationButton}`}>
-          ÷
-        </button>
+        <CalculatorButton text="AC" acButton />
+        <CalculatorButton text="÷" operationButton />
 
-        <button className={styles.calcButton}>7</button>
-        <button className={styles.calcButton}>8</button>
-        <button className={styles.calcButton}>9</button>
-        <button className={`${styles.calcButton} ${styles.operationButton}`}>
-          ×
-        </button>
+        <CalculatorButton text="7" />
+        <CalculatorButton text="8" />
+        <CalculatorButton text="9" />
+        <CalculatorButton text="×" operationButton />
 
-        <button className={styles.calcButton}>4</button>
-        <button className={styles.calcButton}>5</button>
-        <button className={styles.calcButton}>6</button>
-        <button className={`${styles.calcButton} ${styles.operationButton}`}>
-          -
-        </button>
+        <CalculatorButton text="4" />
+        <CalculatorButton text="5" />
+        <CalculatorButton text="6" />
+        <CalculatorButton text="-" operationButton />
 
-        <button className={styles.calcButton}>1</button>
-        <button className={styles.calcButton}>2</button>
-        <button className={styles.calcButton}>3</button>
-        <button className={`${styles.calcButton} ${styles.operationButton}`}>
-          +
-        </button>
+        <CalculatorButton text="1" />
+        <CalculatorButton text="2" />
+        <CalculatorButton text="3" />
+        <CalculatorButton text="+" operationButton />
 
-        <button className={`${styles.zeroButton} ${styles.calcButton}`}>
-          0
-        </button>
-        <button className={`${styles.calcButton} ${styles.operationButton}`}>
-          =
-        </button>
+        <CalculatorButton text="0" zeroButton />
+        <CalculatorButton text="=" operationButton />
 
-        <div className={styles.logPanel}>
-          <ul>
-            {this.state.operationStream.map(op => (
-              <li key={op.key}>{op.msg}</li>
-            ))}
-          </ul>
-        </div>
+        <LogPanel operations={this.state.operationStream} />
       </div>
     );
   }

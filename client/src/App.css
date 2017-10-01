@@ -1,64 +1,7 @@
 .gridContainer {
   display: grid;
-  grid-template-rows: repeat(9, calc(100vh / 9));
+  grid-template-rows: repeat(9, calc(11.1111vh - 1px));
   grid-template-columns: repeat(4, 1fr);
   background: #000;
   grid-gap: 1px 1px;
-}
-
-.calcButton {
-  font-size: 5vh;
-  text-align: center;
-  background: linear-gradient(180deg, #cacbcc 0, #c8cacb);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.calcButton:active {
-  opacity: 0.9;
-  transition: opacity 0.2s;
-}
-
-.operationButton {
-  color: #fff;
-  background: linear-gradient(180deg, #f89312 0, #f89212);
-}
-
-.acButton {
-  grid-column: 1 / span 3;
-}
-
-.resultDisplay {
-  grid-row: 1 / span 2;
-  grid-column: 1 / span 4;
-  background: #202020;
-  color: #fff;
-  font-size: 15vh;
-  position: relative;
-}
-
-.resultDisplay span {
-  position: absolute;
-  bottom: 0;
-  right: 5px;
-}
-
-.zeroButton {
-  grid-column: 1 / span 2;
-}
-
-button {
-}
-
-.logPanel {
-  grid-row: span 2;
-  grid-column: span 4;
-  background: #fff;
-}
-
-.logPanel h3 {
-  padding-left: 10px;
-  font-style: italic;
 }

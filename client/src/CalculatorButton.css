@@ -1,0 +1,32 @@
+.calcButton {
+  font-size: 5vh;
+  text-align: center;
+  background: linear-gradient(180deg, #cacbcc 0, #c8cacb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+}
+
+.calcButton:focus {
+  outline: none;
+}
+
+.calcButton:active {
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+
+.operationButton {
+  color: #fff;
+  background: linear-gradient(180deg, #f89312 0, #f89212);
+}
+
+.acButton {
+  grid-column: 1 / span 3;
+}
+
+.zeroButton {
+  grid-column: span 3;
+}
