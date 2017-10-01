@@ -15,13 +15,13 @@ class App extends Component {
       secondOperand: undefined,
       operator: undefined
     };
-    this.socket = io("http://localhost:4000/");
+    this.socket = io();
     this.socket.on("operation", this.updateOperationList);
   }
 
   componentDidMount() {
     //TODO: this should be changed to window.location.origin
-    fetch("http://localhost:4000" + "/initialOp")
+    fetch("/initialOp")
       .then(response => response.json())
       .then(operations => {
         this.setState(currState => ({ operationStream: operations }));
@@ -69,19 +69,7 @@ class App extends Component {
       }
     } else if (utils.isOperatorButton(buttonText)) {
       if (this.state.secondOperand) {
-        let result = utils.calculate(
-          this.state.firstOperand,
-          this.state.secondOperand,
-          this.state.operator
-        );
-        let msg = utils.stringifyOperation(
-          this.state.firstOperand,
-          this.state.secondOperand,
-          this.state.operator,
-          result
-        );
-        this.sendOperation(msg);
-        this.updateOperationList({ msg: msg, key: Date.now() });
+        let result = this.commitOperation();
         this.setState({
           firstOperand: result,
           secondOperand: undefined,
@@ -92,19 +80,7 @@ class App extends Component {
       }
     } else if (utils.isEqualButton(buttonText)) {
       if (this.state.secondOperand !== undefined) {
-        let result = utils.calculate(
-          this.state.firstOperand,
-          this.state.secondOperand,
-          this.state.operator
-        );
-        let msg = utils.stringifyOperation(
-          this.state.firstOperand,
-          this.state.secondOperand,
-          this.state.operator,
-          result
-        );
-        this.sendOperation(msg);
-        this.updateOperationList({ msg: msg, key: Date.now() });
+        let result = this.commitOperation();
         this.setState({
           firstOperand: result,
           secondOperand: undefined,
@@ -120,6 +96,23 @@ class App extends Component {
       });
     }
     event.stopPropagation();
+  };
+
+  commitOperation = () => {
+    let result = utils.calculate(
+      this.state.firstOperand,
+      this.state.secondOperand,
+      this.state.operator
+    );
+    let msg = utils.stringifyOperation(
+      this.state.firstOperand,
+      this.state.secondOperand,
+      this.state.operator,
+      result
+    );
+    this.sendOperation(msg);
+    this.updateOperationList({ msg: msg, key: Date.now() });
+    return result;
   };
 
   render() {
