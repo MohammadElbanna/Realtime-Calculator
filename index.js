@@ -8,7 +8,6 @@ var operations = [];
 app.use(express.static("client/build"));
 
 app.get("/initialOp", function(req, res) {
-  console.log("inside initialOp");
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(JSON.stringify(operations));
@@ -19,8 +18,6 @@ app.get("/", function(req, res) {
 });
 
 io.on("connection", function(socket) {
-  console.log("a user connected");
-
   socket.on("operation", function(msg) {
     if (operations.length === 10) {
       operations.shift();
